@@ -3,10 +3,20 @@ import os
 import atexit
 import psutil
 
-LOCK_FILE = (
-    Path(__file__).resolve().parent
-    / "tracker.lock"
+APP_DIR = (
+    Path.home()
+    / "AppData"
+    / "Local"
+    / "ScreenTracker"
 )
+
+APP_DIR.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+LOCK_FILE = APP_DIR / "tracker.lock"
+
 
 def acquire_lock():
 
@@ -17,16 +27,14 @@ def acquire_lock():
             pid = int(
                 LOCK_FILE.read_text()
             )
-            
+
             if psutil.pid_exists(pid):
 
                 return False
-            
+
             LOCK_FILE.unlink()
 
-        except Exception as e:
-
-            print("Exception:", e)
+        except Exception:
 
             LOCK_FILE.unlink()
 
@@ -46,5 +54,3 @@ def release_lock():
     if LOCK_FILE.exists():
 
         LOCK_FILE.unlink()
-        
-        

@@ -45,10 +45,10 @@ CODING_KEYWORDS = [
     "github"
 ]
 
+from .storage import DB_PATH
 
 def get_connection():
-
-    return sqlite3.connect("usage.db")
+    return sqlite3.connect(DB_PATH)
 
 
 def format_time(seconds):
@@ -57,7 +57,7 @@ def format_time(seconds):
 
     minutes = (seconds % 3600) // 60
 
-    secs = seconds % 60
+    secs = seconds % 60 
 
     return (
         f"{hours:02}:"
@@ -66,10 +66,7 @@ def format_time(seconds):
     )
 
 
-# ---------------------------------
 # ACTIVE TIME
-# ---------------------------------
-
 def get_total_active_time():
 
     conn = get_connection()
@@ -89,10 +86,7 @@ def get_total_active_time():
     return total
 
 
-# ---------------------------------
 # IDLE TIME
-# ---------------------------------
-
 def get_total_idle_time():
 
     conn = get_connection()
@@ -112,10 +106,7 @@ def get_total_idle_time():
     return total
 
 
-# ---------------------------------
 # CODING TIME
-# ---------------------------------
-
 def get_coding_time():
 
     conn = get_connection()
@@ -150,10 +141,7 @@ def get_coding_time():
 
     return coding_time
 
-# ---------------------------------
 # PRODUCTIVITY SCORE
-# ---------------------------------
-
 def get_productivity_score():
 
     conn = get_connection()
@@ -199,9 +187,7 @@ def get_productivity_score():
     )
 
 
-# ---------------------------------
 # TOP APPS
-# ---------------------------------
 
 def get_top_apps(limit=8):
 
@@ -227,9 +213,7 @@ def get_top_apps(limit=8):
     return rows
 
 
-# ---------------------------------
 # TOP ACTIVITIES
-# ---------------------------------
 
 def get_top_activities(limit=8):
 

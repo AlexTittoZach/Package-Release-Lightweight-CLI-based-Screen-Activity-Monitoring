@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "screentracker"
+version = "0.1.0"
+description = "Privacy-first local screen time tracker for Windows"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "psutil",
+    "pywin32",
+    "rich"
+]
+
+[project.scripts]
+screentracker = "screentracker.tracker:main"
+
+[tool.setuptools]
+packages = ["screentracker"]

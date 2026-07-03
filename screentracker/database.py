@@ -1,16 +1,12 @@
 import sqlite3
 
-DB_NAME = "usage.db"
-
+from .storage import DB_PATH
 
 def init_db():
+    
+    conn = sqlite3.connect(DB_PATH)
 
-    conn = sqlite3.connect(DB_NAME)
-
-    # -------------------------
     # App Usage
-    # -------------------------
-
     conn.execute("""
         CREATE TABLE IF NOT EXISTS app_usage (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,9 +18,7 @@ def init_db():
         )
     """)
 
-    # -------------------------
     # Idle Usage
-    # -------------------------
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS idle_usage (
@@ -39,9 +33,8 @@ def init_db():
     conn.close()
 
 
-# ---------------------------------
+
 # APP TRACKING
-# ---------------------------------
 
 def save_usage(
         app_name,
@@ -50,7 +43,7 @@ def save_usage(
         end_time,
         duration):
 
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DB_PATH)
 
     conn.execute("""
         INSERT INTO app_usage (
@@ -73,16 +66,15 @@ def save_usage(
     conn.close()
 
 
-# ---------------------------------
+
 # IDLE TRACKING
-# ---------------------------------
 
 def save_idle(
         start_time,
         end_time,
         duration):
 
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DB_PATH)
 
     conn.execute("""
         INSERT INTO idle_usage (
