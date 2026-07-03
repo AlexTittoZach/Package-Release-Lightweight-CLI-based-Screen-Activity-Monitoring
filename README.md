@@ -13,7 +13,7 @@ Installation -
 (no worries few dependencies only needed)
 
 RUN -
-    python tracker.py
+    screentracker
 
 
 Initially planned to make it as a package so any windows user can access using pip install, will share updates later. 
